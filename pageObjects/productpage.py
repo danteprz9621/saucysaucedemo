@@ -1,49 +1,49 @@
-from pageObjects.locators import sauceLocators
+from pageObjects.locators import SauceLocators
 
-class productPage:
+class ProductPage:
 
     def __init__(self, driver):
         self.driver = driver;
 
     def getItemNames(self):
-        return self.driver.find_elements(*sauceLocators.item_name)
+        return self.driver.find_elements(*SauceLocators.item_name)
 
     def getCartBtns(self):
-        return self.driver.find_elements(*sauceLocators.addtocart_btn)
+        return self.driver.find_elements(*SauceLocators.addtocart_btn)
 
     def getSortBtn(self):
-        return self.driver.find_element(*sauceLocators.sort_btn)
+        return self.driver.find_element(*SauceLocators.sort_btn)
 
     def getLoHiOpt(self):
-        return self.driver.find_element(*sauceLocators.lohi_opt)
+        return self.driver.find_element(*SauceLocators.lohi_opt)
 
     def getHiLoOpt(self):
-        return self.driver.find_element(*sauceLocators.hilo_opt)
+        return self.driver.find_element(*SauceLocators.hilo_opt)
 
     def getCartBtn(self):
-        return self.driver.find_element(*sauceLocators.cart_btn)
+        return self.driver.find_element(*SauceLocators.cart_btn)
 
     def getItemsInCart(self):
-        return self.driver.find_element(*sauceLocators.items_in_cart)
+        return self.driver.find_element(*SauceLocators.items_in_cart)
 
     def getMenuBtn(self):
-        return self.driver.find_element(*sauceLocators.menu_btn)
+        return self.driver.find_element(*SauceLocators.menu_btn)
 
     def getResetAppBtn(self):
-        return self.driver.find_element(*sauceLocators.reset_app_menu)
+        return self.driver.find_element(*SauceLocators.reset_app_menu)
 
     def getLogoutBtn(self):
-        return self.driver.find_element(*sauceLocators.logout_menu)
+        return self.driver.find_element(*SauceLocators.logout_menu)
 
     def getAboutBtn(self):
-        return self.driver.find_element(*sauceLocators.about_menu)
+        return self.driver.find_element(*SauceLocators.about_menu)
 
     def getTwitterBtn(self):
-        return self.driver.find_element(*sauceLocators.twitter_btn)
+        return self.driver.find_element(*SauceLocators.twitter_btn)
 
     def getFacebookBtn(self):
-        return self.driver.find_element(*sauceLocators.fb_btn)
+        return self.driver.find_element(*SauceLocators.fb_btn)
 
     def getLinkedinBtn(self):
-        return self.driver.find_element(*sauceLocators.linkedin_btn)
+        return self.driver.find_element(*SauceLocators.linkedin_btn)
 

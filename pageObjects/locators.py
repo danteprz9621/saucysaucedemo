@@ -1,11 +1,12 @@
 from selenium.webdriver.common.by import By
 
-class sauceLocators:
+
+class SauceLocators:
     ##Login Page
     username = (By.XPATH, "//input[@id='user-name']")
-    password = (By.XPATH,"//input[@id='password']")
-    login_btn = (By.XPATH,"//input[@id='login-button']")
-    logerror_msg = (By.XPATH,"//h3[@data-test='error']")
+    password = (By.XPATH, "//input[@id='password']")
+    login_btn = (By.XPATH, "//input[@id='login-button']")
+    logerror_msg = (By.XPATH, "//h3[@data-test='error']")
 
     ##Product Page
     item_name = (By.CLASS_NAME, "inventory_item_name")

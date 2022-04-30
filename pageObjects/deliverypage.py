@@ -1,18 +1,18 @@
-from pageObjects.locators import sauceLocators
+from pageObjects.locators import SauceLocators
 
-class deliveryPage:
+class DeliveryPage:
 
     def __init__(self, driver):
         self.driver = driver;
 
     def getFirstNameInput(self):
-        return self.driver.find_element(*sauceLocators.first_name)
+        return self.driver.find_element(*SauceLocators.first_name)
 
     def getLastNameInput(self):
-        return self.driver.find_element(*sauceLocators.last_name)
+        return self.driver.find_element(*SauceLocators.last_name)
 
     def getPostalCode(self):
-        return self.driver.find_element(*sauceLocators.postal_code)
+        return self.driver.find_element(*SauceLocators.postal_code)
 
     def getContinueBtn(self):
-        return self.driver.find_element(*sauceLocators.continue_btn)
+        return self.driver.find_element(*SauceLocators.continue_btn)

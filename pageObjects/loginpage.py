@@ -1,22 +1,22 @@
-from pageObjects.locators import sauceLocators
+from pageObjects.locators import SauceLocators
 
 
-class loginPage:
+class LoginPage:
 
     def __init__(self, driver):
         self.driver = driver;
 
     def getUsernameInput(self):
-        return self.driver.find_element(*sauceLocators.username)
+        return self.driver.find_element(*SauceLocators.username)
 
     def getPasswordInput(self):
-        return self.driver.find_element(*sauceLocators.password)
+        return self.driver.find_element(*SauceLocators.password)
 
     def getLoginBtn(self):
-        return self.driver.find_element(*sauceLocators.login_btn)
+        return self.driver.find_element(*SauceLocators.login_btn)
 
     def getLogErrorMsg(self):
-        return self.driver.find_element(*sauceLocators.logerror_msg)
+        return self.driver.find_element(*SauceLocators.logerror_msg)
 
 
 
