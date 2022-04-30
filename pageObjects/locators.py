@@ -1,6 +1,6 @@
 from selenium.webdriver.common.by import By
 
-class saucelocators:
+class sauceLocators:
     ##Login Page
     username = (By.XPATH, "//input[@id='user-name']")
     password = (By.XPATH,"//input[@id='password']")
