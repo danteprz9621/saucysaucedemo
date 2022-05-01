@@ -47,3 +47,5 @@ class ProductPage:
     def getLinkedinBtn(self):
         return self.driver.find_element(*SauceLocators.linkedin_btn)
 
+    def getItemPrices(self):
+        return self.driver.find_elements(*SauceLocators.item_price)

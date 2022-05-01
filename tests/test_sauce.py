@@ -2,6 +2,8 @@ from utilities.baseclass import BaseClass
 from TestData.logindata import getTestData
 from assertpy import assert_that
 from selenium import webdriver
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from pageObjects.loginpage import LoginPage
 from pageObjects.productpage import ProductPage
 from pageObjects.checkoutpage import CheckoutPage
@@ -124,10 +126,60 @@ class TestSauce(BaseClass):
         self.restart()
 
     def test_LoHiSort(self):
-        pass
+        log = self.getLogger()
+        loginpage = LoginPage(self.driver)
+        productpage = ProductPage(self.driver)
+        data = getTestData(1)
+        log.info(data)
+        loginpage.getUsernameInput().send_keys(data.get("username"))
+        loginpage.getPasswordInput().send_keys(data.get("password"))
+        loginpage.getLoginBtn().click()
+
+        productpage.getSortBtn().click()
+        productpage.getLoHiOpt().click()
+
+        priceslist = productpage.getItemPrices()
+
+        prices = []
+        i = 0
+        for x in priceslist:
+            prices.append(float(x.text[1:]))
+            i += 1
+
+        log.info(prices)
+
+        for y in prices:
+            assert_that(prices[0]).is_less_than_or_equal_to(y)
+
+        self.restart()
 
     def test_HiLoSort(self):
-        pass
+        log = self.getLogger()
+        loginpage = LoginPage(self.driver)
+        productpage = ProductPage(self.driver)
+        data = getTestData(1)
+        log.info(data)
+        loginpage.getUsernameInput().send_keys(data.get("username"))
+        loginpage.getPasswordInput().send_keys(data.get("password"))
+        loginpage.getLoginBtn().click()
+
+        productpage.getSortBtn().click()
+        productpage.getHiLoOpt().click()
+
+        priceslist = productpage.getItemPrices()
+
+        prices = []
+        i = 0
+        for x in priceslist:
+            prices.append(float(x.text[1:]))
+            i += 1
+
+        log.info(prices)
+
+        for y in prices:
+            assert_that(prices[0]).is_greater_than_or_equal_to(y)
+
+        self.restart()
 
     def test_MultipleItems(self):
         log = self.getLogger()
@@ -153,7 +205,62 @@ class TestSauce(BaseClass):
 
         assert_that(int(productpage.getItemsInCart().text)).is_greater_than(1)
 
-        #self.restart()
+        self.restart()
+
+    def test_AboutTab(self):
+        log = self.getLogger()
+        loginpage = LoginPage(self.driver)
+        productpage = ProductPage(self.driver)
+        checkoutpage = CheckoutPage(self.driver)
+        deliverypage = DeliveryPage(self.driver)
+        overviewpage = OverviewPage(self.driver)
+        completepage = CompletePage(self.driver)
+
+        data = getTestData(1)
+        log.info(data)
+        loginpage.getUsernameInput().send_keys(data.get("username"))
+        loginpage.getPasswordInput().send_keys(data.get("password"))
+        loginpage.getLoginBtn().click()
+
+        productpage.getMenuBtn().click()
+        productpage.getAboutBtn().click()
+
+        assert_that(self.driver.current_url).is_equal_to("https://saucelabs.com/")
+
+        self.restart()
+
+    def test_TwitterIcon(self):
+        log = self.getLogger()
+        loginpage = LoginPage(self.driver)
+        productpage = ProductPage(self.driver)
+
+        data = getTestData(1)
+        log.info(data)
+        loginpage.getUsernameInput().send_keys(data.get("username"))
+        loginpage.getPasswordInput().send_keys(data.get("password"))
+        loginpage.getLoginBtn().click()
+
+        wait = WebDriverWait(self.driver, 10)
+
+        ogwindow = self.driver.current_window_handle
+        productpage.getTwitterBtn().click()
+        wait.until(EC.number_of_windows_to_be(2))
+        for window_handle in self.driver.window_handles:
+            if window_handle != ogwindow:
+                self.driver.switch_to.window(window_handle)
+                break
+
+        wait.until(EC.title_is("Sauce Labs (@saucelabs) / Twitter"))
+        log.info(self.driver.current_url)
+        assert_that(self.driver.current_url).is_equal_to("https://twitter.com/saucelabs")
+        self.driver.close()
+
+        self.driver.switch_to.window(ogwindow)
+
+        self.restart()
+
+
+
 
 
 

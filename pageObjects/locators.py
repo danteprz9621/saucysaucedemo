@@ -14,6 +14,7 @@ class SauceLocators:
     sort_btn = (By.XPATH, "//select[@class='product_sort_container']")
     lohi_opt = (By.XPATH, "//option[@value='lohi']")
     hilo_opt = (By.XPATH, "//option[@value='hilo']")
+    item_price = (By.CLASS_NAME, "inventory_item_price")
     cart_btn = (By.XPATH, "	//a[@class='shopping_cart_link']")
     items_in_cart = (By.XPATH, "//span[@class='shopping_cart_badge']")
     menu_btn = (By.XPATH, "//button[@id='react-burger-menu-btn']")

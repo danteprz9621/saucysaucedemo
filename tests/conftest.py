@@ -20,8 +20,9 @@ def setup(request):
         case 'firefox':
             driver = webdriver.Firefox(executable_path="C:\\geckodriver.exe")
 
+    driver.implicitly_wait(10)
     driver.get("https://www.saucedemo.com/")
     driver.maximize_window()
     request.cls.driver = driver
     yield
-    #driver.close()
+    driver.close()
