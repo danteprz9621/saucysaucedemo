@@ -14,3 +14,6 @@ class BaseClass:
         logger.addHandler(fileHandler)
         logger.setLevel(logging.DEBUG)
         return logger
+
+    def restart(self):
+        self.driver.get("https://www.saucedemo.com/")

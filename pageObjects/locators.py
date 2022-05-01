@@ -10,7 +10,7 @@ class SauceLocators:
 
     ##Product Page
     item_name = (By.CLASS_NAME, "inventory_item_name")
-    addtocart_btn = (By.CLASS_NAME, "btn btn_primary btn_small btn_inventory")
+    addtocart_btn = (By.CLASS_NAME, "btn_inventory")
     sort_btn = (By.XPATH, "//select[@class='product_sort_container']")
     lohi_opt = (By.XPATH, "//option[@value='lohi']")
     hilo_opt = (By.XPATH, "//option[@value='hilo']")
@@ -26,7 +26,7 @@ class SauceLocators:
 
     ##Checkout Page
     checkout_btn = (By.XPATH, "//button[@id='checkout']")
-    cart_item = (By.CLASS_NAME, "cart_item")
+    cart_item = (By.CLASS_NAME, "inventory_item_name")
 
     ##Delivery Page
     first_name = (By.XPATH, "//input[@id='first-name']")

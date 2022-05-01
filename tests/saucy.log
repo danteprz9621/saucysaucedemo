@@ -1,2 +1,1 @@
-2022-04-30 17:51:17,920 :INFO : test_demo1 :[{'username': 'standard_user', 'password': 'secret_sauce', 'first name': 'Dante', 'last name': 'Perez', 'postal code': 10293}]
-2022-04-30 17:59:31,459 :INFO : test_demo1 :[{'username': 'standard_user', 'password': 'secret_sauce', 'first name': 'Dante', 'last name': 'Perez', 'postal code': 10293}]
+
