@@ -17,12 +17,17 @@ class TestSauce(BaseClass):
         log = self.getLogger()
         loginpage = LoginPage(self.driver)
         data = getTestData(1)
-        log.info(data)
+
         loginpage.getUsernameInput().send_keys(data.get("username"))
         loginpage.getPasswordInput().send_keys(data.get("password"))
+        log.info("Login")
+        log.info('username:'+data.get("username"))
+        log.info('password:'+data.get("password"))
+        log.info("Url:"+self.driver.current_url)
         loginpage.getLoginBtn().click()
 
         assert_that(self.driver.current_url).is_equal_to("https://www.saucedemo.com/inventory.html")
+        log.info("Url:"+self.driver.current_url)
         self.restart()
 
     def test_AddLabsOnesie(self):
@@ -32,10 +37,15 @@ class TestSauce(BaseClass):
         checkoutpage = CheckoutPage(self.driver)
 
         data = getTestData(1)
-        log.info(data)
+
         loginpage.getUsernameInput().send_keys(data.get("username"))
         loginpage.getPasswordInput().send_keys(data.get("password"))
+        log.info("Login")
+        log.info('username:'+data.get("username"))
+        log.info('password:'+data.get("password"))
+        log.info("Url:"+self.driver.current_url)
         loginpage.getLoginBtn().click()
+        log.info("Url:"+self.driver.current_url)
 
         addcartbtns = productpage.getCartBtns()
 
@@ -43,6 +53,7 @@ class TestSauce(BaseClass):
         for x in productpage.getItemNames():
             if x.text == 'Sauce Labs Onesie':
                 addcartbtns[i].click()
+                log.info("Added "+x.text+" to cart")
             i += 1
 
         productpage.getCartBtn().click()
@@ -50,7 +61,7 @@ class TestSauce(BaseClass):
         items = checkoutpage.getCartItems()
 
         assert_that(items[0].text).is_equal_to("Sauce Labs Onesie")
-
+        log.info("Url:"+self.driver.current_url)
         self.restart()
 
     def test_CompletePurchase(self):
@@ -63,9 +74,13 @@ class TestSauce(BaseClass):
         completepage = CompletePage(self.driver)
 
         data = getTestData(1)
-        log.info(data)
+
         loginpage.getUsernameInput().send_keys(data.get("username"))
         loginpage.getPasswordInput().send_keys(data.get("password"))
+        log.info("Login")
+        log.info('username:'+data.get("username"))
+        log.info('password:'+data.get("password"))
+        log.info("Url:"+self.driver.current_url)
         loginpage.getLoginBtn().click()
 
         addcartbtns = productpage.getCartBtns()
@@ -74,11 +89,14 @@ class TestSauce(BaseClass):
         for x in productpage.getItemNames():
             if x.text == 'Sauce Labs Onesie':
                 addcartbtns[i].click()
+                log.info("Added "+x.text+" to cart")
             i += 1
 
+        log.info("Url:"+self.driver.current_url)
         productpage.getCartBtn().click()
-
+        log.info("Url:"+self.driver.current_url)
         checkoutpage.getCheckoutBtn().click()
+        log.info("Url:"+self.driver.current_url)
 
         deliverypage.getFirstNameInput().send_keys(data.get("first name"))
 
@@ -91,21 +109,26 @@ class TestSauce(BaseClass):
         overviewpage.getFinishBtn().click()
 
         assert_that(completepage.getDispatchedText().text).is_equal_to("Your order has been dispatched, and will arrive just as fast as the pony can get there!")
-
+        log.info("Url:"+self.driver.current_url)
         self.restart()
 
     def test_InvalidUserLogin(self):
         log = self.getLogger()
         loginpage = LoginPage(self.driver)
         data = getTestData(5)
-        log.info(data)
+
         loginpage.getUsernameInput().send_keys(data.get("username"))
         loginpage.getPasswordInput().send_keys(data.get("password"))
+        log.info("Login")
+        log.info('username:'+data.get("username"))
+        log.info('password:'+data.get("password"))
+        log.info("Url:"+self.driver.current_url)
         loginpage.getLoginBtn().click()
 
-        log.info(loginpage.getLogErrorMsg().text)
+        log.info("Error message: "+loginpage.getLogErrorMsg().text)
 
         assert_that(loginpage.getLogErrorMsg().text).is_equal_to("Epic sadface: Username and password do not match any user in this service")
+        log.info("Url:"+self.driver.current_url)
         self.restart()
 
     def test_Logout(self):
@@ -113,16 +136,21 @@ class TestSauce(BaseClass):
         loginpage = LoginPage(self.driver)
         productpage = ProductPage(self.driver)
         data = getTestData(1)
-        log.info(data)
+
         loginpage.getUsernameInput().send_keys(data.get("username"))
         loginpage.getPasswordInput().send_keys(data.get("password"))
+        log.info("Login")
+        log.info('username:'+data.get("username"))
+        log.info('password:'+data.get("password"))
+        log.info("Url:"+self.driver.current_url)
         loginpage.getLoginBtn().click()
-
+        log.info("Url:"+self.driver.current_url)
         productpage.getMenuBtn().click()
         productpage.getLogoutBtn().click()
 
-        assert_that(self.driver.current_url).is_equal_to("https://www.saucedemo.com/")
 
+        assert_that(self.driver.current_url).is_equal_to("https://www.saucedemo.com/")
+        log.info("Url:"+self.driver.current_url)
         self.restart()
 
     def test_LoHiSort(self):
@@ -130,13 +158,18 @@ class TestSauce(BaseClass):
         loginpage = LoginPage(self.driver)
         productpage = ProductPage(self.driver)
         data = getTestData(1)
-        log.info(data)
+
         loginpage.getUsernameInput().send_keys(data.get("username"))
         loginpage.getPasswordInput().send_keys(data.get("password"))
+        log.info("Login")
+        log.info('username:'+data.get("username"))
+        log.info('password:'+data.get("password"))
+        log.info("Url:"+self.driver.current_url)
         loginpage.getLoginBtn().click()
-
+        log.info("Url:"+self.driver.current_url)
         productpage.getSortBtn().click()
         productpage.getLoHiOpt().click()
+        log.info("Sorted products prices from low to high")
 
         priceslist = productpage.getItemPrices()
 
@@ -146,11 +179,11 @@ class TestSauce(BaseClass):
             prices.append(float(x.text[1:]))
             i += 1
 
-        log.info(prices)
+        log.info("Sorted prices: "+str(prices))
 
         for y in prices:
             assert_that(prices[0]).is_less_than_or_equal_to(y)
-
+        log.info("Url:"+self.driver.current_url)
         self.restart()
 
     def test_HiLoSort(self):
@@ -158,13 +191,19 @@ class TestSauce(BaseClass):
         loginpage = LoginPage(self.driver)
         productpage = ProductPage(self.driver)
         data = getTestData(1)
-        log.info(data)
+
         loginpage.getUsernameInput().send_keys(data.get("username"))
         loginpage.getPasswordInput().send_keys(data.get("password"))
+        log.info("Login")
+        log.info('username:'+data.get("username"))
+        log.info('password:'+data.get("password"))
+        log.info("Url:"+self.driver.current_url)
         loginpage.getLoginBtn().click()
 
+        log.info("Url:"+self.driver.current_url)
         productpage.getSortBtn().click()
         productpage.getHiLoOpt().click()
+        log.info("Sorted products prices from high to low")
 
         priceslist = productpage.getItemPrices()
 
@@ -174,11 +213,11 @@ class TestSauce(BaseClass):
             prices.append(float(x.text[1:]))
             i += 1
 
-        log.info(prices)
+        log.info("Sorted prices: "+str(prices))
 
         for y in prices:
             assert_that(prices[0]).is_greater_than_or_equal_to(y)
-
+        log.info("Url:"+self.driver.current_url)
         self.restart()
 
     def test_MultipleItems(self):
@@ -191,20 +230,25 @@ class TestSauce(BaseClass):
         completepage = CompletePage(self.driver)
 
         data = getTestData(1)
-        log.info(data)
+
         loginpage.getUsernameInput().send_keys(data.get("username"))
         loginpage.getPasswordInput().send_keys(data.get("password"))
+        log.info("Login")
+        log.info('username:'+data.get("username"))
+        log.info('password:'+data.get("password"))
+        log.info("Url:"+self.driver.current_url)
         loginpage.getLoginBtn().click()
-
+        log.info("Url:"+self.driver.current_url)
         addcartbtns = productpage.getCartBtns()
 
         i = 0
         for x in productpage.getItemNames():
             addcartbtns[i].click()
+            log.info("Added " + x.text + " to cart")
             i += 1
 
         assert_that(int(productpage.getItemsInCart().text)).is_greater_than(1)
-
+        log.info("Url:"+self.driver.current_url)
         self.restart()
 
     def test_AboutTab(self):
@@ -217,16 +261,21 @@ class TestSauce(BaseClass):
         completepage = CompletePage(self.driver)
 
         data = getTestData(1)
-        log.info(data)
+
         loginpage.getUsernameInput().send_keys(data.get("username"))
         loginpage.getPasswordInput().send_keys(data.get("password"))
+        log.info("Login")
+        log.info('username:'+data.get("username"))
+        log.info('password:'+data.get("password"))
+        log.info("Url:"+self.driver.current_url)
         loginpage.getLoginBtn().click()
+        log.info("Url:"+self.driver.current_url)
 
         productpage.getMenuBtn().click()
         productpage.getAboutBtn().click()
 
         assert_that(self.driver.current_url).is_equal_to("https://saucelabs.com/")
-
+        log.info("Url:"+self.driver.current_url)
         self.restart()
 
     def test_TwitterIcon(self):
@@ -235,10 +284,15 @@ class TestSauce(BaseClass):
         productpage = ProductPage(self.driver)
 
         data = getTestData(1)
-        log.info(data)
+
         loginpage.getUsernameInput().send_keys(data.get("username"))
         loginpage.getPasswordInput().send_keys(data.get("password"))
+        log.info("Login")
+        log.info('username:'+data.get("username"))
+        log.info('password:'+data.get("password"))
+        log.info("Url:"+self.driver.current_url)
         loginpage.getLoginBtn().click()
+        log.info("Url:"+self.driver.current_url)
 
         wait = WebDriverWait(self.driver, 10)
 
@@ -256,7 +310,7 @@ class TestSauce(BaseClass):
         self.driver.close()
 
         self.driver.switch_to.window(ogwindow)
-
+        log.info("Url:"+self.driver.current_url)
         self.restart()
 
 
